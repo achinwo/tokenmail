@@ -7,8 +7,7 @@
     "eslint-plugin-html": "^1.7.0"
   },
   "scripts": {
-    "lint": "eslint . --ext js,html --ignore-path .gitignore",
-    "test": "npm run lint && polymer test"
+    "start": "node server"
   },
   "dependencies": {
     "bluebird": "^3.4.7",
@@ -17,6 +16,7 @@
     "cookie-parser": "^1.4.3",
     "debug": "^2.6.1",
     "express": "^4.14.1",
+    "lite-server": "^2.2.2",
     "lodash": "^4.17.4",
     "morgan": "^1.8.1",
     "restify": "^4.3.0",
