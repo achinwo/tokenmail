@@ -56,6 +56,10 @@ tm.controller("MainCntl", function($scope, db) {
 
 tm.controller("DetailCntl", function($scope, db, $route) {
     console.log($route.current.params.id);
-    $scope.pt = db.getTokens($route.current.params.id);
+    $scope.token = db.getTokens($route.current.params.id);
+
+    $scope.onDelete = function(tokenId){
+        console.log("Deleting token with id of  " + tokenId);
+    }
 });
 
