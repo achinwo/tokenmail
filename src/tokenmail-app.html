@@ -22,12 +22,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="tokenmail-icons.html">
 
-<dom-module id="my-app">
+<dom-module id="tokenmail-app">
   <template>
     <style>
       :host {
-        --app-primary-color: #4285f4;
-        --app-secondary-color: black;
+        --app-primary-color: #e6f47b;
+        --app-secondary-color: rgba(99, 108, 224, 0.67);
 
         display: block;
       }
@@ -70,9 +70,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <app-drawer id="drawer">
         <app-toolbar>Menu</app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="view1" href="/view1">View One</a>
-          <a name="view2" href="/view2">View Two</a>
-          <a name="view3" href="/view3">View Three</a>
+          <a name="view1" href="/token-list-item">Token 1</a>
         </iron-selector>
       </app-drawer>
 
@@ -81,7 +79,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         <app-header condenses reveals effects="waterfall">
           <app-toolbar>
-            <paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>
+            <paper-icon-button icon="tokenmail-icons:menu" drawer-toggle></paper-icon-button>
             <div main-title>My App</div>
           </app-toolbar>
         </app-header>
@@ -91,10 +89,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             attr-for-selected="name"
             fallback-selection="view404"
             role="main">
-          <my-view1 name="view1"></my-view1>
-          <my-view2 name="view2"></my-view2>
-          <my-view3 name="view3"></my-view3>
-          <my-view404 name="view404"></my-view404>
+          <token-view name="view1"></token-view>
+          <tokenmail-404 name="view404"></tokenmail-404>
         </iron-pages>
       </app-header-layout>
     </app-drawer-layout>
@@ -102,7 +98,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <script>
     Polymer({
-      is: 'my-app',
+      is: 'tokenmail-app',
 
       properties: {
         page: {
@@ -131,7 +127,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _showPage404: function() {
-        this.page = 'view404';
+        this.page = 'tokenmail-404';
       },
     });
   </script>
