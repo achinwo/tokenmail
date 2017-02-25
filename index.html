@@ -29,16 +29,18 @@
 </nav>
 <div class="container">
     <div class="row">
-        <div class="col-sm-3" ng-controller="MainCntl">Tokens
+        <div class="col-sm-3" ng-controller="MainCntl">
             <div class="list-group">
                 <a href="/#token/{{token.id}}" class="list-group-item" ng-repeat="token in tokens" >
                     {{token.name}}
                 </a>
+                    <button type="button" class="btn btn-success">New token</button>
+
             </div>
 
         </div>
         <div class="col-sm-9">
-            Detail
+
             <div ng-view></div>
         </div>
     </div>
