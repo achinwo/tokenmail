@@ -1,6 +1,6 @@
 
 "use strict";
-var tm = angular.module('tokeMailApp', ['ngRoute', 'ngSanitize']);
+var tm = angular.module('tokeMailApp', ['ngRoute', 'ngSanitize', 'ui.bootstrap']);
 
 tm.config(function($routeProvider, $locationProvider) {
     $routeProvider.
@@ -46,12 +46,23 @@ tm.service('db', function() {
     };
 });
 
-tm.controller("AppCntl", function($scope, $route) {
+tm.controller("AppCntl",  function($scope, $route) {
     $scope.$route = $route;
 });
 
-tm.controller("MainCntl", function($scope, db) {
+
+
+tm.controller("MainCntl", function($scope, db, $uibModal) {
     $scope.tokens = db.getTokens(0);
+
+    $scope.openAddTokenDialog = function () {
+        console.log('opening pop up');
+        var modalInstance = $uibModal.open({
+            templateUrl: '../../addToken.html',
+            controller: 'PopupCont',
+            scope: $scope
+        });
+    }
 });
 
 tm.controller("DetailCntl", function($scope, db, $route) {
@@ -62,4 +73,13 @@ tm.controller("DetailCntl", function($scope, db, $route) {
         console.log("Deleting token with id of  " + tokenId);
     }
 });
+
+tm.controller('PopupCont',  function ($scope, $uibModalInstance) {
+    $scope.close = function () {
+        $uibModalInstance.close();
+    };
+});
+
+
+
 
