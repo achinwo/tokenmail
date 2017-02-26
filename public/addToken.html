@@ -6,11 +6,11 @@
 
         <div class="input-group">
             <span class="input-group-addon" id="basic-addon1">@</span>
-            <input type="text" class="form-control" placeholder="Website" aria-describedby="basic-addon1">
+            <input type="text" class="form-control" placeholder="{{website}}" aria-describedby="basic-addon1" ng-model="website">
         </div>
         <br>
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="Recipient's token" aria-describedby="basic-addon2">
+            <input type="text" class="form-control" placeholder="Recipient's token" aria-describedby="basic-addon2" ng-model="token">
             <span class="input-group-addon" id="basic-addon2">@tokenmail.com</span>
         </div>
         <br>
@@ -19,7 +19,7 @@
     <div class="modal-footer">
 
         <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-success">Create</button>
+            <button type="button" class="btn btn-success" ng-click="create()">Create</button>
             <button class="btn btn-warning" type="button"
                     ng-click="close()" data-dismiss="modal">Cancel</button>
         </div>

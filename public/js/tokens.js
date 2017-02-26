@@ -74,10 +74,19 @@ tm.controller("DetailCntl", function($scope, db, $route) {
     }
 });
 
-tm.controller('PopupCont',  function ($scope, $uibModalInstance) {
+tm.controller('PopupCont',  function ($scope, $uibModalInstance, $route) {
+    $scope.website = "website";
+    $scope.token = "token";
     $scope.close = function () {
         $uibModalInstance.close();
     };
+
+    $scope.create = function(){
+        console.log("Creating tokens: website="+$scope.website + " token="+ $scope.token);
+        $scope.close();
+        $route.reload();
+    };
+
 });
 
 
