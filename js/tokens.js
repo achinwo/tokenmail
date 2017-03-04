@@ -20,28 +20,16 @@ tm.config(function($routeProvider, $locationProvider) {
     });
 });
 
-tm.service('db', function() {
-    var tokens = [{
-        "id": "1",
-        "name": "Amazon",
-        "value":"7a87d575-ce69-40a5-8dfc-6c268b6e7f32"
-    }, {
-        "id": "2",
-        "name": "Stripe",
-        "value":"9543ef5-9fe9-476c-88fe-be690c3ea9ec"
-    }, {
-        "id": "3",
-        "name": "Bingo",
-        "value":"722880d9-c3bd-4a74-8616-a6caf3c6f7f4"
-    }];
+tm.service('db', function($http) {
+    let isDev = (location.hostname === "localhost" || location.hostname === "127.0.0.1")
+    let apiBasePath = isDev ? 'http://localhost:3003/api' : '/api'
 
     return {
-        getTokens: function(tokenId) {
-            if (tokenId === 0) {
-                return tokens;
-            } else {
-                return tokens[tokenId - 1];
-            }
+        getAllTokens: function() {
+            return $http.get(apiBasePath + '/tokens')
+        },
+        getToken: function (tokenId) {
+            return $http.get(apiBasePath + '/tokens/' + tokenId)
         }
     };
 });
@@ -53,7 +41,12 @@ tm.controller("AppCntl",  function($scope, $route) {
 
 
 tm.controller("MainCntl", function($scope, db, $uibModal) {
-    $scope.tokens = db.getTokens(0);
+    $scope.tokens = [];
+    
+    db.getAllTokens().then((values) => {
+        console.log('got tokens:', values)
+        $scope.tokens = values.data;
+    })
 
     $scope.openAddTokenDialog = function () {
         console.log('opening pop up');
@@ -67,7 +60,7 @@ tm.controller("MainCntl", function($scope, db, $uibModal) {
 
 tm.controller("DetailCntl", function($scope, db, $route) {
     console.log($route.current.params.id);
-    $scope.token = db.getTokens($route.current.params.id);
+    db.getToken($route.current.params.id).then((res) => $scope.token = res.data)
 
     $scope.onDelete = function(tokenId){
         console.log("Deleting token with id of  " + tokenId);
